@@ -149,14 +149,28 @@ class Command(BaseCommand):
                 # ── 1. Crear o actualizar Instituto ───────────────────────────
                 # get_or_create busca por 'nombre'; si no existe, lo crea con defaults
                 instituto, creado = Instituto.objects.get_or_create(
-                    nombre=str(row['nombre']).strip(),
+                    codigo=int(row['codigo']) if pd.notna(row.get('codigo')) else 0,
                     defaults={
-                        'direccion': str(row.get('direccion', '')).strip()
-                                     if pd.notna(row.get('direccion')) else '',
-                        'distrito':  str(row.get('municipio', '')).strip()
-                                     if pd.notna(row.get('municipio')) else '',
-                        'latitud':   float(row['latitud'])  if pd.notna(row.get('latitud'))  else None,
-                        'longitud':  float(row['longitud']) if pd.notna(row.get('longitud')) else None,
+                        'nombre':       str(row['nombre']).strip(),
+                        'tipo':         str(row.get('tipo', '')).strip()
+                                        if pd.notna(row.get('tipo')) else '',
+                        'titularidad':  str(row.get('titularidad', '')).strip()
+                                        if pd.notna(row.get('titularidad')) else '',
+                        'municipio':    str(row.get('municipio', '')).strip()
+                                        if pd.notna(row.get('municipio')) else '',
+                        'direccion':    str(row.get('direccion', '')).strip()
+                                        if pd.notna(row.get('direccion')) else '',
+                        'codigo_postal': str(int(row['codigo_postal'])) if pd.notna(row.get('codigo_postal')) else '',
+                        'telefono':     str(row.get('telefono', '')).strip()
+                                        if pd.notna(row.get('telefono')) else '',
+                        'email':        str(row.get('email', '')).strip()
+                                        if pd.notna(row.get('email')) else '',
+                        'web':          str(row.get('web', '')).strip()
+                                        if pd.notna(row.get('web')) else '',
+                        'latitud':      float(row['latitud'])  if pd.notna(row.get('latitud'))  else 0.0,
+                        'longitud':     float(row['longitud']) if pd.notna(row.get('longitud')) else 0.0,
+                        'situacion':    str(row.get('situacion', '')).strip()
+                                        if pd.notna(row.get('situacion')) else '',
                     }
                 )
 
