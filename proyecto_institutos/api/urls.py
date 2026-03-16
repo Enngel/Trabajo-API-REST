@@ -1,8 +1,7 @@
-from django.urls import path
-from .views import InstitutoListView, InstitutoDetailView
+from rest_framework.routers import DefaultRouter
+from .views import InstitutoViewSet
 
-urlpatterns = [
-    path('institutos/',          InstitutoListView.as_view(),   name='instituto-list'),
-    path('institutos/<int:pk>/', InstitutoDetailView.as_view(), name='instituto-detail'),
-    
-]
+router = DefaultRouter()
+router.register(r'institutos', InstitutoViewSet, basename='institutos')
+
+urlpatterns = router.urls

@@ -1,25 +1,21 @@
-from rest_framework import generics, filters
+from rest_framework import viewsets, filters
 from .models import Instituto
 from .serializers import InstitutoSerializer
 
-class InstitutoListView(generics.ListAPIView):
-    queryset         = Instituto.objects.all()
+class InstitutoViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = Instituto.objects.all()
     serializer_class = InstitutoSerializer
-    filter_backends  = [filters.SearchFilter, filters.OrderingFilter]
-    search_fields    = ['nombre', 'municipio']
-    ordering_fields  = ['nombre', 'municipio']
-    ordering         = ['municipio']
 
+    # Filtros obligatorios según el diseño del proyecto
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['ciclos__nombre']  # Permite ?search=DAW
+
+    # Si queréis usar ?ciclo= en vez de ?search=
     def get_queryset(self):
-        qs          = super().get_queryset()
-        municipio   = self.request.query_params.get('municipio')
-        titularidad = self.request.query_params.get('titularidad')
-        if municipio:
-            qs = qs.filter(municipio__icontains=municipio)
-        if titularidad:
-            qs = qs.filter(titularidad__icontains=titularidad)
-        return qs
+        qs = super().get_queryset()
+        ciclo = self.request.query_params.get('ciclo')
 
-class InstitutoDetailView(generics.RetrieveAPIView):
-    queryset         = Instituto.objects.all()
-    serializer_class = InstitutoSerializer
+        if ciclo:
+            qs = qs.filter(ciclos__nombre__icontains=ciclo)
+
+        return qs
