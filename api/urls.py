@@ -2,9 +2,13 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    # Ruta para ver la lista completa de institutos y poder buscar/filtrar
+    # ==========================================
+    # RUTAS API (Formato Django / Sin Front-end)
+    # ==========================================
+    # Fíjate que hemos eliminado 'api/' del inicio
     path('institutos/', views.InstitutoListView.as_view(), name='lista_institutos'),
-
-    # Ruta para ver el detalle de un solo instituto (usando su ID o primary key 'pk')
     path('institutos/<int:pk>/', views.InstitutoDetailView.as_view(), name='detalle_instituto'),
+    path('institutos/<int:codigo>/ciclos/', views.CicloFormativoByInstitutoView.as_view(), name='ciclos_instituto'),
+
+    # Si tienes rutas de ciclos formativos, añádelas aquí también sin el 'api/'
 ]

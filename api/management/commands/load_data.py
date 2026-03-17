@@ -123,13 +123,13 @@ class Command(BaseCommand):
 
         # ── Reset opcional ────────────────────────────────────────────────────
         if options['reset']:
-            self.stdout.write(self.style.WARNING("⚠  --reset activado: borrando datos existentes..."))
+            self.stdout.write(self.style.WARNING("  --reset activado: borrando datos existentes..."))
             Instituto.objects.all().delete()
             CicloFormativo.objects.all().delete()
             self.stdout.write("   Tablas vaciadas.\n")
 
         # ── Leer CSV ──────────────────────────────────────────────────────────
-        self.stdout.write(f"📂 Leyendo archivo: {csv_path}")
+        self.stdout.write(f" Leyendo archivo: {csv_path}")
         try:
             df = pd.read_csv(csv_path, encoding='utf-8')
         except Exception as e:
@@ -219,7 +219,7 @@ class Command(BaseCommand):
 
         # ── Resumen final ─────────────────────────────────────────────────────
         self.stdout.write("\n" + "─" * 50)
-        self.stdout.write(self.style.SUCCESS("✅ Carga completada"))
+        self.stdout.write(self.style.SUCCESS(" Carga completada"))
         self.stdout.write("─" * 50)
         self.stdout.write(f"  Institutos creados:      {inst_creados}")
         self.stdout.write(f"  Institutos actualizados: {inst_actualizados}")

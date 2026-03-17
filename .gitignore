@@ -1,0 +1,169 @@
+# ═══════════════════════════════════════════════════════════════════════════
+# GITIGNORE - Proyecto Django Consolidado
+# ═══════════════════════════════════════════════════════════════════════════
+
+# ENTORNO VIRTUAL
+# ───────────────────────────────────────────────────────────────────────────
+.venv/
+venv/
+env/
+ENV/
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PYTHON - CACHE Y COMPILACIÓN
+# ───────────────────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.coverage
+htmlcov/
+*.cover
+
+# DJANGO
+# ───────────────────────────────────────────────────────────────────────────
+*.log
+local_settings.py
+/staticfiles/
+/media/
+db.sqlite3
+db.sqlite3-journal
+
+# BASE DE DATOS
+# ───────────────────────────────────────────────────────────────────────────
+*.db
+*.postgres
+*.postgresql
+
+# IDE Y EDITORES
+# ───────────────────────────────────────────────────────────────────────────
+.vscode/
+.idea/
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.swp
+*.swo
+*~
+.DS_Store
+.sublime-project
+.sublime-workspace
+*.code-workspace
+*.iml
+*.iws
+*.ipr
+
+# SISTEMA OPERATIVO
+# ───────────────────────────────────────────────────────────────────────────
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+*.lnk
+$RECYCLE.BIN/
+
+# REPORTES Y RESULTADOS
+# ───────────────────────────────────────────────────────────────────────────
+reporte_validacion.json
+*.txt.bak
+*.csv.bak
+
+# ARCHIVOS DUPLICADOS (EVITAR REGRESIONES)
+# ───────────────────────────────────────────────────────────────────────────
+proyecto_institutos/
+main.py
+MainMenu.py
+BuscarCSV.py
+*/models.py.bak
+*/views.py.bak
+*/serializers.py.bak
+*/models/
+*/views/
+*/serializers/
+
+# SCRIPTS TEMPORALES
+# ───────────────────────────────────────────────────────────────────────────
+*.tmp
+*.temp
+temp/
+tmp/
+
+# DATOS TEMPORALES
+# ───────────────────────────────────────────────────────────────────────────
+data/*.csv.bak
+data/*.csv.tmp
+data/temp/
+data/*.xlsx
+data/*.xls
+
+# ARCHIVOS DE DESARROLLO
+# ───────────────────────────────────────────────────────────────────────────
+.env
+.env.local
+.env.*.local
+debug.log
+error.log
+
+# GIT
+# ───────────────────────────────────────────────────────────────────────────
+!.gitkeep
+.gitattributes
+
+# Testing
+.coverage
+.pytest_cache/
+htmlcov/
+
+# OS
+.DS_Store
+Thumbs.db
+.env
+.env.local
+
+# Secretos (nunca versionar)
+SECRET_KEY = '*'
+*.key
+*.pem
+
+# Archivos temporales
+*.tmp
+*.bak
+*.swp
+*~
+
+# Directorios específicos
+node_modules/
+package-lock.json
+yarn.lock
+
+# Configuración local
+config/local_settings.py
+

@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Institutos Educativos Madrid - Inicio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* NAVBAR */
+        nav {
+            background: rgba(0, 0, 0, 0.1);
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(10px);
+        }
+
+        nav h1 {
+            color: white;
+            font-size: 24px;
+        }
+
+        nav .nav-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        nav a, nav button {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        nav a:hover, nav button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        /* CONTENEDOR PRINCIPAL */
+        .container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+
+        .hero {
+            text-align: center;
+            color: white;
+            max-width: 800px;
+            animation: fadeIn 0.8s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .hero .buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 15px 40px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: white;
+            color: #667eea;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: #667eea;
+        }
+
+        /* CARACTERÍSTICAS */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 60px;
+            margin-bottom: 40px;
+        }
+
+        .feature {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 25px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s;
+        }
+
+        .feature:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-5px);
+        }
+
+        .feature .icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+        }
+
+        .feature h3 {
+            color: white;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        .feature p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* FOOTER */
+        footer {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 30px;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.7);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        footer p {
+            margin-bottom: 10px;
+        }
+
+        footer a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 600px) {
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .hero .buttons {
+                flex-direction: column;
+            }
+
+            nav {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            nav .nav-buttons {
+                width: 100%;
+                justify-content: space-between;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- NAVBAR -->
+    <nav>
+        <h1> Institutos Madrid</h1>
+        <div class="nav-buttons">
+            {% if user.is_authenticated %}
+                <a href="{% url 'dashboard' %}"> Dashboard</a>
+                <form method="post" action="{% url 'logout' %}" style="margin: 0; display: inline;">
+                    {% csrf_token %}
+                    <button type="submit" style="background: #ff6b6b; border: none;"> Logout</button>
+                </form>
+            {% else %}
+                <a href="{% url 'login' %}"> Iniciar Sesión</a>
+                <a href="{% url 'register' %}"> Registrarse</a>
+            {% endif %}
+            <a href="{% url 'schema-swagger-ui' %}"> Swagger API</a>
+        </div>
+    </nav>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <div class="container">
+        <div class="hero">
+            <h1> Institutos Educativos de Madrid</h1>
+            <p>Encuentra institutos, ciclos formativos y busca por ubicación</p>
+
+            <div class="buttons">
+                {% if user.is_authenticated %}
+                    <a href="{% url 'dashboard' %}" class="btn btn-primary">
+                         Ir al Dashboard
+                    </a>
+                {% else %}
+                    <a href="{% url 'register' %}" class="btn btn-primary">
+                         Crear Cuenta
+                    </a>
+                    <a href="{% url 'login' %}" class="btn btn-secondary">
+                         Iniciar Sesión
+                    </a>
+                {% endif %}
+                <a href="{% url 'schema-swagger-ui' %}" class="btn btn-secondary">
+                     Ver API
+                </a>
+            </div>
+
+            <!-- CARACTERÍSTICAS -->
+            <div class="features">
+                <div class="feature">
+                    <div class="icon"></div>
+                    <h3>Búsqueda Avanzada</h3>
+                    <p>Busca institutos por nombre, municipio, tipo y titularidad</p>
+                </div>
+
+                <div class="feature">
+                    <div class="icon"></div>
+                    <h3>Ciclos Formativos</h3>
+                    <p>Localiza ciclos por código (DAW, ASIR, etc.) o nombre</p>
+                </div>
+
+                <div class="feature">
+                    <div class="icon"></div>
+                    <h3>Geolocalización</h3>
+                    <p>Filtra centros por distancia desde tu ubicación actual</p>
+                </div>
+
+                <div class="feature">
+                    <div class="icon"></div>
+                    <h3>API REST</h3>
+                    <p>Accede a la API completa con documentación Swagger</p>
+                </div>
+
+                <div class="feature">
+                    <div class="icon"></div>
+                    <h3>Seguro</h3>
+                    <p>Sistema de autenticación seguro con contraseñas encriptadas</p>
+                </div>
+
+                <div class="feature">
+                    <div class="icon"></div>
+                    <h3>Responsive</h3>
+                    <p>Funciona perfectamente en móvil, tablet y escritorio</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <p> API de Institutos Educativos - Comunidad de Madrid</p>
+        <p>
+            <a href="{% url 'schema-swagger-ui' %}">Swagger API</a> |
+            <a href="{% url 'login' %}">Login</a> |
+            <a href="{% url 'register' %}">Registrarse</a>
+        </p>
+        <p>&copy; 2026 - Todos los derechos reservados</p>
+    </footer>
+</body>
+</html>
+
